@@ -45,7 +45,7 @@ public class Game {
             default:
                 score = sumOfAllDice(roll, score);
                 break;
-        }
+            }
 
         return score;
     }
