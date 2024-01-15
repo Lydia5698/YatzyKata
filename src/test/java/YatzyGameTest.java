@@ -103,4 +103,16 @@ public class YatzyGameTest {
         assertThat(game.score(roll,"four of a kind"), is(0));
     }
 
+    @Test
+    public void rollSmallStraight(){
+        int[] roll = {2,1,3,4,5};
+        assertThat(game.score(roll,"small straight"), is(15));
+    }
+
+    @Test
+    public void rollNoRightSmallStraight(){
+        int[] roll = {4,2,3,4,5};
+        assertThat(game.score(roll,"small straight"), is(0));
+    }
+
 }

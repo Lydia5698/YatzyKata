@@ -39,9 +39,21 @@ public class Game {
             case "four of a kind":{
                 return checkAndCalculateFourOfAKind(roll);
             }
+            case "small straight": {
+                return checkAndCalculateSmallStraight(roll);
+            }
             default:
                 return sumOfAllDice(roll);
             }
+    }
+
+    private int checkAndCalculateSmallStraight(int[] roll) {
+        int [] smallStraight = {1,2,3,4,5};
+        Arrays.sort(roll);
+        if(Arrays.equals(roll, smallStraight)){
+            return 15;
+        }
+        return 0;
     }
 
     private int checkAndCalculateFourOfAKind(int[] roll) {
