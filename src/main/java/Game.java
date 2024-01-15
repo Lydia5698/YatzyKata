@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Game {
     public int score(int[] roll, String category) {
@@ -43,11 +45,7 @@ public class Game {
                 break;
             }
             case "two pairs": {
-                // zwei Zahlen finden
-                for (int i = 0; i < roll.length; i++){
-                    score = 0;
-                }
-                score = 8;
+                score = checkAndCalculateTwoPairs(roll);
 
                 break;
             }
@@ -56,6 +54,16 @@ public class Game {
                 break;
             }
 
+        return score;
+    }
+
+    private int checkAndCalculateTwoPairs(int[] roll) {
+        int score = 0;
+        Set<Integer> distinctNumbersSet  = new HashSet<>();
+        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray(); // false duplicate elements that are already present in the Set
+        for (int duplicateNumber : duplicateNumbers) {
+            score += 2 * duplicateNumber;
+        }
         return score;
     }
 
