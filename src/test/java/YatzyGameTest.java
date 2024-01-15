@@ -115,4 +115,16 @@ public class YatzyGameTest {
         assertThat(game.score(roll,"small straight"), is(0));
     }
 
+    @Test
+    public void rollLargeStraight(){
+        int[] roll = {2,6,3,4,5};
+        assertThat(game.score(roll,"large straight"), is(20));
+    }
+
+    @Test
+    public void rollNoRightLargeStraight(){
+        int[] roll = {1,2,3,4,5};
+        assertThat(game.score(roll,"large straight"), is(0));
+    }
+
 }

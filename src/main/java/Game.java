@@ -42,9 +42,22 @@ public class Game {
             case "small straight": {
                 return checkAndCalculateSmallStraight(roll);
             }
+            case "large straight":{
+                return checkAndCalculateLargeStraight(roll);
+            }
             default:
                 return sumOfAllDice(roll);
             }
+    }
+
+    private int checkAndCalculateLargeStraight(int[] roll) {
+        int [] largeStraight = {2,3,4,5,6};
+        int score = 0;
+        Arrays.sort(roll);
+        if(Arrays.equals(roll, largeStraight)){
+            score = 20;
+        }
+        return score;
     }
 
     private int checkAndCalculateSmallStraight(int[] roll) {
