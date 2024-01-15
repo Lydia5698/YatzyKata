@@ -47,7 +47,7 @@ public class YatzyGameTest {
 
     @Test
     public void rollAPairWithTwoFours(){
-        int[] roll = {3,3,3,4,4};
+        int[] roll = {3,3,6,4,4};
         assertThat(game.score(roll,"pair"), is(8));
     }
 

@@ -60,7 +60,7 @@ public class Game {
     private int checkAndCalculateTwoPairs(int[] roll) {
         int score = 0;
         Set<Integer> distinctNumbersSet  = new HashSet<>();
-        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray(); // false duplicate elements that are already present in the Set
+        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray(); // false: duplicate elements that are already present in the Set
         for (int duplicateNumber : duplicateNumbers) {
             score += 2 * duplicateNumber;
         }
@@ -69,15 +69,15 @@ public class Game {
 
     private int checkAndCalculateAPair(int[] roll) {
         int highestNumberInRoll;
-        if (Arrays.stream(roll).max().isPresent()){
-            highestNumberInRoll = Arrays.stream(roll).max().getAsInt();
-        } else {
-            highestNumberInRoll = 0;
-        }
-        if(Arrays.stream(roll).filter(i -> i == highestNumberInRoll).count() == 2){
+        Set<Integer> distinctNumbersSet  = new HashSet<>();
+        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray();
+
+        if (Arrays.stream(duplicateNumbers).max().isPresent()){
+            highestNumberInRoll = Arrays.stream(duplicateNumbers).max().getAsInt();
             return 2 * highestNumberInRoll;
         }
         return 0;
+
     }
 
     private int checkAndCalculateTheNumbers(int[] roll, int number) {
