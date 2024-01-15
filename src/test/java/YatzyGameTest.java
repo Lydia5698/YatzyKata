@@ -74,4 +74,17 @@ public class YatzyGameTest {
         assertThat(game.score(roll,"two pairs"), is(0));
     }
 
+    @Test
+    public void rollThreeOfAKindWithThrees(){
+        int[] roll = {4,3,3,3,4};
+        assertThat(game.score(roll,"three of a kind"), is(9));
+    }
+
+    @Test
+    public void rollThreeOfAKindNoRightThreeOfAKind(){
+        int[] roll = {1,2,3,4,5};
+        assertThat(game.score(roll,"three of a kind"), is(0));
+    }
+
+
 }

@@ -4,63 +4,60 @@ import java.util.Set;
 
 public class Game {
     public int score(int[] roll, String category) {
-        int score;
         switch (category) {
-            case "yatzy":
-                score = checkYatzy(roll);
-
-                break;
-            case "ones":
-                score = checkAndCalculateTheNumbers(roll,1);
-
-                break;
+            case "yatzy": {
+                return checkYatzy(roll);
+            }
+            case "ones": {
+                return checkAndCalculateTheNumbers(roll, 1);
+            }
             case "twos": {
-                score = checkAndCalculateTheNumbers(roll, 2);
-
-                break;
+                return checkAndCalculateTheNumbers(roll, 2);
             }
             case "threes": {
-                score = checkAndCalculateTheNumbers(roll, 3);
-
-                break;
+                return checkAndCalculateTheNumbers(roll, 3);
             }
             case "fours": {
-                score = checkAndCalculateTheNumbers(roll, 4);
-
-                break;
+                return checkAndCalculateTheNumbers(roll, 4);
             }
             case "fives": {
-                score = checkAndCalculateTheNumbers(roll, 5);
-
-                break;
+                return checkAndCalculateTheNumbers(roll, 5);
             }
             case "sixes": {
-                score = checkAndCalculateTheNumbers(roll, 6);
-
-                break;
+                return checkAndCalculateTheNumbers(roll, 6);
             }
             case "pair": {
-                score = checkAndCalculateAPair(roll);
-
-                break;
+                return  checkAndCalculateAPair(roll);
             }
             case "two pairs": {
-                score = checkAndCalculateTwoPairs(roll);
+                return checkAndCalculateTwoPairs(roll);
 
-                break;
+            }
+            case "three of a kind": {
+                return checkAndCalculateThreeOfAKind(roll);
             }
             default:
-                score = sumOfAllDice(roll);
-                break;
+                return sumOfAllDice(roll);
             }
+    }
 
-        return score;
+    private int checkAndCalculateThreeOfAKind(int[] roll) { // // TODO: 15.01.24 Überarbeiten
+        int[] duplicateNumbers = getAllDuplicates(roll);
+        if (duplicateNumbers.length == 0){
+            return 0;
+        }
+        else if (duplicateNumbers[0] == duplicateNumbers[1]){
+            return 3 * duplicateNumbers[0];
+        }
+        else if(duplicateNumbers[1] == duplicateNumbers[2]){
+            return 3 * duplicateNumbers[1];
+        }
+        return 0;
     }
 
     private int checkAndCalculateTwoPairs(int[] roll) {
         int score = 0;
-        Set<Integer> distinctNumbersSet  = new HashSet<>();
-        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray(); // false: duplicate elements that are already present in the Set
+        int[] duplicateNumbers = getAllDuplicates(roll);
         for (int duplicateNumber : duplicateNumbers) {
             score += 2 * duplicateNumber;
         }
@@ -69,8 +66,7 @@ public class Game {
 
     private int checkAndCalculateAPair(int[] roll) {
         int highestNumberInRoll;
-        Set<Integer> distinctNumbersSet  = new HashSet<>();
-        int[] duplicateNumbers = Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray();
+        int[] duplicateNumbers = getAllDuplicates(roll);
 
         if (Arrays.stream(duplicateNumbers).max().isPresent()){
             highestNumberInRoll = Arrays.stream(duplicateNumbers).max().getAsInt();
@@ -78,6 +74,11 @@ public class Game {
         }
         return 0;
 
+    }
+
+    private int[] getAllDuplicates(int[] roll) {
+        Set<Integer> distinctNumbersSet  = new HashSet<>();
+        return Arrays.stream(roll).filter(e -> !distinctNumbersSet.add(e)).toArray();
     }
 
     private int checkAndCalculateTheNumbers(int[] roll, int number) {
