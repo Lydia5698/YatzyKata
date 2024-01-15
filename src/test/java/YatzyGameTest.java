@@ -56,4 +56,11 @@ public class YatzyGameTest {
         int[] roll = {1,2,3,4,5};
         assertThat(game.score(roll,"pair"), is(0));
     }
+
+    @Test
+    public void rollTwoPairsWithTwoOnesAndTwoThrees(){
+        int[] roll = {1,1,2,3,3};
+        assertThat(game.score(roll,"two pairs"), is(8));
+    }
+
 }
