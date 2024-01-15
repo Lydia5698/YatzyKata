@@ -15,14 +15,14 @@ public class Game {
 
                 break;
             case "twos": {
-                int quantityOfFours = (int) Arrays.stream(roll).filter(i -> i == 2).count();
-                score = 2 * quantityOfFours;
+                int quantityOfTwos = (int) Arrays.stream(roll).filter(i -> i == 2).count();
+                score = 2 * quantityOfTwos;
 
                 break;
             }
             case "threes": {
-                int quantityOfFours = (int) Arrays.stream(roll).filter(i -> i == 3).count();
-                score = 3 * quantityOfFours;
+                int quantityOfThrees = (int) Arrays.stream(roll).filter(i -> i == 3).count();
+                score = 3 * quantityOfThrees;
 
                 break;
             }
@@ -33,8 +33,19 @@ public class Game {
                 break;
             }
             case "fives": {
-                int quantityOfFours = (int) Arrays.stream(roll).filter(i -> i == 5).count();
-                score = 5 * quantityOfFours;
+                int quantityOfFives = (int) Arrays.stream(roll).filter(i -> i == 5).count();
+                score = 5 * quantityOfFives;
+
+                break;
+            }
+            case "sixes": {
+                int quantityOfSixes = (int) Arrays.stream(roll).filter(i -> i == 6).count();
+                score = 6 * quantityOfSixes;
+
+                break;
+            }
+            case "pair": {
+                score = 8;
 
                 break;
             }
