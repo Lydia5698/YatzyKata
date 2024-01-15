@@ -52,6 +52,12 @@ public class YatzyGameTest {
     }
 
     @Test
+    public void rollAPairWithFourFours(){
+        int[] roll = {4,4,6,4,4};
+        assertThat(game.score(roll,"pair"), is(8));
+    }
+
+    @Test
     public void rollAPairWithNoPair(){
         int[] roll = {1,2,3,4,5};
         assertThat(game.score(roll,"pair"), is(0));
@@ -61,6 +67,11 @@ public class YatzyGameTest {
     public void rollTwoPairsWithTwoOnesAndTwoThrees(){
         int[] roll = {1,1,2,3,3};
         assertThat(game.score(roll,"two pairs"), is(8));
+    }
+    @Test
+    public void rollTwoPairsWithNoRightPair(){
+        int[] roll = {1,2,3,4,5};
+        assertThat(game.score(roll,"two pairs"), is(0));
     }
 
 }
