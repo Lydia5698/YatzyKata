@@ -37,15 +37,19 @@ public class Game {
                 return checkAndCalculateThreeOfAKind(roll);
             }
             case "four of a kind":{
-                int[] duplicateNumbers = getAllDuplicates(roll);
-                if (Arrays.stream(duplicateNumbers).count() >=3){
-                    return 4 * duplicateNumbers[0];
-                }
-                return 0;
+                return checkAndCalculateFourOfAKind(roll);
             }
             default:
                 return sumOfAllDice(roll);
             }
+    }
+
+    private int checkAndCalculateFourOfAKind(int[] roll) {
+        int[] duplicateNumbers = getAllDuplicates(roll);
+        if (Arrays.stream(duplicateNumbers).count() >=3){
+            return 4 * duplicateNumbers[0];
+        }
+        return 0;
     }
 
     private int checkAndCalculateThreeOfAKind(int[] roll) { // // TODO: 15.01.24 Überarbeiten
