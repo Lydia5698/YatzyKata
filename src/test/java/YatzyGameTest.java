@@ -50,4 +50,10 @@ public class YatzyGameTest {
         int[] roll = {3,3,3,4,4};
         assertThat(game.score(roll,"pair"), is(8));
     }
+
+    @Test
+    public void rollAPairWithNoPair(){
+        int[] roll = {1,2,3,4,5};
+        assertThat(game.score(roll,"pair"), is(0));
+    }
 }

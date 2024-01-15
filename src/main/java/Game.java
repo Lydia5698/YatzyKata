@@ -5,47 +5,40 @@ public class Game {
         int score = 0;
         switch (category) {
             case "yatzy":
-                if (Arrays.stream(roll).allMatch(i -> i == roll[0])) {
-                    score = 50;
-                }
+                score = checkYatzy(roll, score);
 
                 break;
             case "ones":
-                score = (int) Arrays.stream(roll).filter(i -> i == 1).count();
+                score = checkAndCalculateTheNumbers(roll,1);
 
                 break;
             case "twos": {
-                int quantityOfTwos = (int) Arrays.stream(roll).filter(i -> i == 2).count();
-                score = 2 * quantityOfTwos;
+                score = checkAndCalculateTheNumbers(roll, 2);
 
                 break;
             }
             case "threes": {
-                int quantityOfThrees = (int) Arrays.stream(roll).filter(i -> i == 3).count();
-                score = 3 * quantityOfThrees;
+                score = checkAndCalculateTheNumbers(roll, 3);
 
                 break;
             }
             case "fours": {
-                int quantityOfFours = (int) Arrays.stream(roll).filter(i -> i == 4).count();
-                score = 4 * quantityOfFours;
+                score = checkAndCalculateTheNumbers(roll, 4);
 
                 break;
             }
             case "fives": {
-                int quantityOfFives = (int) Arrays.stream(roll).filter(i -> i == 5).count();
-                score = 5 * quantityOfFives;
+                score = checkAndCalculateTheNumbers(roll, 5);
 
                 break;
             }
             case "sixes": {
-                int quantityOfSixes = (int) Arrays.stream(roll).filter(i -> i == 6).count();
-                score = 6 * quantityOfSixes;
+                score = checkAndCalculateTheNumbers(roll, 6);
 
                 break;
             }
             case "pair": {
-                score = 8;
+                score = checkAndCalculateAPair(roll, score);
 
                 break;
             }
@@ -54,6 +47,31 @@ public class Game {
                 break;
         }
 
+        return score;
+    }
+
+    private int checkAndCalculateAPair(int[] roll, int score) {
+        int highestNumberInRoll;
+        if (Arrays.stream(roll).max().isPresent()){
+            highestNumberInRoll = Arrays.stream(roll).max().getAsInt();
+        } else {
+            highestNumberInRoll = 0;
+        }
+        if(Arrays.stream(roll).filter(i -> i == highestNumberInRoll).count() == 2){
+            score = 2 * highestNumberInRoll;
+        }
+        return score;
+    }
+
+    private int checkAndCalculateTheNumbers(int[] roll, int number) {
+        int quantityOfTheNumber = (int) Arrays.stream(roll).filter(i -> i == number).count();
+        return number * quantityOfTheNumber;
+    }
+
+    private int checkYatzy(int[] roll, int score) {
+        if (Arrays.stream(roll).allMatch(i -> i == roll[0])) {
+            score = 50;
+        }
         return score;
     }
 
