@@ -31,7 +31,6 @@ public class Game {
             }
             case "two pairs": {
                 return checkAndCalculateTwoPairs(roll);
-
             }
             case "three of a kind": {
                 return checkAndCalculateThreeOfAKind(roll);
@@ -45,9 +44,23 @@ public class Game {
             case "large straight":{
                 return checkAndCalculateLargeStraight(roll);
             }
+            case "full house": {
+                return checkAndCalculateFullHouse(roll);
+            }
             default:
                 return sumOfAllDice(roll);
             }
+    }
+
+    private int checkAndCalculateFullHouse(int[] roll) {
+        int[] duplicateNumbers = getAllDuplicates(roll);
+        if (!(duplicateNumbers.length == 3)){
+            return 0;
+        }
+        else if (duplicateNumbers[0] == duplicateNumbers[1] || duplicateNumbers[1] == duplicateNumbers[2]){
+            return sumOfAllDice(roll);
+        }
+        return 0;
     }
 
     private int checkAndCalculateLargeStraight(int[] roll) {
@@ -79,7 +92,7 @@ public class Game {
 
     private int checkAndCalculateThreeOfAKind(int[] roll) { // // TODO: 15.01.24 Überarbeiten
         int[] duplicateNumbers = getAllDuplicates(roll);
-        if (duplicateNumbers.length == 0){
+        if (!(duplicateNumbers.length == 3)){
             return 0;
         }
         else if (duplicateNumbers[0] == duplicateNumbers[1]){
