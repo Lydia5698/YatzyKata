@@ -1,6 +1,8 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class Game {
     public int score(int[] roll, String category) {
@@ -54,17 +56,14 @@ public class Game {
 
     private int checkAndCalculateFullHouse(int[] roll) {
         int[] duplicateNumbers = getAllDuplicates(roll);
-        if (!(duplicateNumbers.length == 3)){
-            return 0;
-        }
-        else if (duplicateNumbers[0] == duplicateNumbers[1] || duplicateNumbers[1] == duplicateNumbers[2]){
+        if (duplicateNumbers.length == 3){
             return sumOfAllDice(roll);
         }
         return 0;
     }
 
     private int checkAndCalculateLargeStraight(int[] roll) {
-        int [] largeStraight = {2,3,4,5,6};
+        int[] largeStraight = {2,3,4,5,6};
         int score = 0;
         Arrays.sort(roll);
         if(Arrays.equals(roll, largeStraight)){
@@ -74,7 +73,7 @@ public class Game {
     }
 
     private int checkAndCalculateSmallStraight(int[] roll) {
-        int [] smallStraight = {1,2,3,4,5};
+        int[] smallStraight = {1,2,3,4,5};
         Arrays.sort(roll);
         if(Arrays.equals(roll, smallStraight)){
             return 15;
@@ -84,24 +83,25 @@ public class Game {
 
     private int checkAndCalculateFourOfAKind(int[] roll) {
         int[] duplicateNumbers = getAllDuplicates(roll);
-        if (Arrays.stream(duplicateNumbers).count() >=3){
+        if (duplicateNumbers.length >= 3){
             return 4 * duplicateNumbers[0];
         }
         return 0;
     }
 
-    private int checkAndCalculateThreeOfAKind(int[] roll) { // // TODO: 15.01.24 Überarbeiten
+    private int checkAndCalculateThreeOfAKind(int[] roll) { // // TODO: 15.01.24 gehts besser? Mit Stream Anzahl der gleichen Zahlen
         int[] duplicateNumbers = getAllDuplicates(roll);
-        if (!(duplicateNumbers.length == 3)){
-            return 0;
+
+        if (duplicateNumbers.length >= 3) {
+            if (duplicateNumbers[0] == duplicateNumbers[1] || duplicateNumbers[0] == duplicateNumbers[2]){
+                return 3 * duplicateNumbers[0];
+            }
+            if (duplicateNumbers[1] == duplicateNumbers[2]){
+                return 3 * duplicateNumbers[1];
+            }
         }
-        else if (duplicateNumbers[0] == duplicateNumbers[1]){
-            return 3 * duplicateNumbers[0];
-        }
-        else if(duplicateNumbers[1] == duplicateNumbers[2]){
-            return 3 * duplicateNumbers[1];
-        }
-        return 0;
+
+       return 0;
     }
 
     private int checkAndCalculateTwoPairs(int[] roll) {

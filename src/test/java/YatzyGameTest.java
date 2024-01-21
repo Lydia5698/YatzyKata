@@ -76,13 +76,18 @@ public class YatzyGameTest {
 
     @Test
     public void rollThreeOfAKindWithThrees(){
-        int[] roll = {4,3,3,3,4};
+        int[] roll = {3,3,3,3,3};
+        assertThat(game.score(roll,"three of a kind"), is(9));
+    }
+    @Test
+    public void rollThreeOfAKindWithAlsoTwoOfAKind(){
+        int[] roll = {2,3,3,3,2};
         assertThat(game.score(roll,"three of a kind"), is(9));
     }
 
     @Test
     public void rollThreeOfAKindNoRightThreeOfAKind(){
-        int[] roll = {1,1,1,1,1};
+        int[] roll = {1,2,3,4,5};
         assertThat(game.score(roll,"three of a kind"), is(0));
     }
 
@@ -129,13 +134,13 @@ public class YatzyGameTest {
 
     @Test
     public void rollFullHouse(){
-        int[] roll = {1,2,1,2,2};
+        int[] roll = {2,1,2,1,2};
         assertThat(game.score(roll,"full house"), is(8));
     }
 
     @Test
     public void rollNoFullHouse(){
-        int[] roll = {1,2,1,3,2};
+        int[] roll = {1,2,2,3,1};
         assertThat(game.score(roll,"full house"), is(0));
     }
 
